@@ -1,24 +1,16 @@
-// console.log(document.getElementById("header-title"));
-// var Title = document.getElementById("header-title");
-// Title.textContent = "Hello";
-// Title.innerText ="Hey";
-// Title.style.borderBottom = "solid 3px #000";
-// var AddItem = document.getElementById("main");
-// AddItem.innerText;
+// document.querySelector()
 
+var List = document.querySelector(".list-group-item:nth-child(2)");
+List.style.backgroundColor = "green";
 
-// document.getElementsByClassName
-// var items = document.getElementsByClassName("list-group-item");
-// for(var i=0;i<items.length;i++){
-//     items[i].style.fontWeight = "bold";
-// }
-// items[2].style.backgroundColor = "green";
+var List = document.querySelector(".list-group-item:nth-child(3)");
+List.style.opacity = 0;
 
-// document.getElementsByTagName
-var List = document.getElementsByTagName("li");
-for(var i=0;i<List.length;i++){
-    List[i].style.fontWeight = "bold";
+// document.querySelectorAll()
+var items = document.querySelectorAll("li");
+items[1].style.color = "green";
+
+var odd = document.querySelectorAll("li:nth-child(odd)");
+for(var i=0;i<odd.length;i++){
+    odd[i].style.backgroundColor = "green";
 }
-
-List[2].style.backgroundColor = "green";
-List[4].style.color = "red";
