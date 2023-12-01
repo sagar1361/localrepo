@@ -57,18 +57,23 @@
                   <script>
                         function registration(event) {
                         event.preventDefault();
-                        let userName = event.target.fname.value;
-                        let email = event.target.email.value;
-                        let phoneNum = event.target.phone_num.value;
+                        let obj = {
+                            userName : event.target.fname.value,
+                            email : event.target.email.value,
+                            phoneNum : event.target.phone_num.value,
+                        };
+                        
                         console.log(event.target.Date.value);
                         console.log(event.target.Time.value);
                         
-                        
-                        localStorage.setItem('fullname', userName);
-                        localStorage.setItem('email', email);
-                        localStorage.setItem('phonenum', phoneNum);
-                        }
 
+                        let my_objs = JSON.stringify(obj);
+                        
+                        localStorage.setItem('obj', my_objs);
+
+                        let my_objd = JSON.parse(localStorage.getItem("obj"));
+                        
+                        };
                         
                   </script>
 
