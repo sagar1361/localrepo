@@ -50,6 +50,7 @@
                 <br>
                 <input type="submit" value="GET A CALL" style="background-color: darkorange;" required>
             </form>
+            <ul></ul>
         </fieldset>
     </section>
 
@@ -57,10 +58,18 @@
                   <script>
                         function registration(event) {
                         event.preventDefault();
+
+                        let userName = event.target.fname.value;
+                        let email = event.target.email.value;
+                        let phoneNum = event.target.phone_num.value;
+
+                        localStorage.setItem('fullName' , userName);
+                        localStorage.setItem('email', email);
+                        localStorage.setItem('phone_num', phoneNum);
                         let obj = {
-                            userName : event.target.fname.value,
-                            email : event.target.email.value,
-                            phoneNum : event.target.phone_num.value,
+                            userName,
+                            email,
+                            phoneNum 
                         };
                         
                         console.log(event.target.Date.value);
@@ -69,12 +78,23 @@
 
                         let my_objs = JSON.stringify(obj);
                         
-                        localStorage.setItem('obj', my_objs);
+                        localStorage.setItem(email, my_objs);
 
                         let my_objd = JSON.parse(localStorage.getItem("obj"));
                         
+                        showListOfUser(obj);
+    
                         };
-                        
+                        function showListOfUser(obj){
+  
+                         let parentElem = document.querySelector("ul");
+                         let childElem = document.createElement("li");
+
+                         childElem.textContent = "Name -" + obj.userName +  " Email - " + obj.email + " PhoneNum -" + obj.phoneNum;
+
+                         parentElem.appendChild(childElem);
+                        };
+                    
                   </script>
 
 </body>
