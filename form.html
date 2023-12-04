@@ -36,7 +36,7 @@
         <br>
         <p style="font-size: x-small;":> Book a call and our reprensentative will call you within 1hr of selected time.</p>
         <hr>
-        <form action="#" onsubmit="registration(event)">
+        <form onsubmit="registration(event)">
             <label for="fname">Name:</label><br>
                 <input type="text" id="fname" name="fname" required><br>
             <label for="email">Email:</label><br>
@@ -44,14 +44,14 @@
             <label for="phone_num">Phone:</label><br>
                 <input type="number" id="phone_num" name="phone_num" required><br>
             <label for="Date">Time for Call:</label><br>
-                <input type="date" id="Date" name="Time for Call" style="width: 247px;" required>
+                <input type="date" id="Date" name="Time for Call" style="width: 247px;" >
                 <label for="Time"></label>
-                <input type="time" id="Time" name="Time for Call" style="width: 246px;" required>
+                <input type="time" id="Time" name="Time for Call" style="width: 246px;" >
                 <br>
                 <input type="submit" value="GET A CALL" style="background-color: darkorange;" required>
             
             </form>
-            <ul></ul>
+            <ul id="listofItems"></ul>
         </fieldset>
     </section>
 
@@ -73,13 +73,13 @@
                             phoneNum 
                         };
                         
-                        console.log(event.target.Date.value);
-                        console.log(event.target.Time.value);
+                        // console.log(event.target.Date.value);
+                        // console.log(event.target.Time.value);
                         
 
                         let my_objs = JSON.stringify(obj);
                         
-                        localStorage.setItem(emailId, my_objs);
+                        localStorage.setItem(obj.emailId, my_objs);
 
                         let my_objd = JSON.parse(localStorage.getItem("obj"));
                         
@@ -88,23 +88,38 @@
                         };
                         function showListOfUser(obj){
   
-                         parentElem = document.querySelector("ul");
+                         parentElem = document.querySelector("#listofItems");
                          childElem = document.createElement("li");
 
-                         childElem.textContent = "Name -" + obj.userName +  " Email - " + obj.emailId + " PhoneNum -" + obj.phoneNum;
-
+                         childElem.textContent = "Name -" + obj.userName +  " Email -" + obj.emailId + " PhoneNum -" + obj.phoneNum;
                             
-                            
-                            parentElem.appendChild(childElem);
-                    
+                        //  delete button Added
                             let delbtn = document.createElement("button");
                             delbtn.innerText = "Delete";
                             childElem.appendChild(delbtn);
                             
-                            delbtn.addEventListener("click" , () => {
-                                parentElem.removeChild(childElem);
+                            delbtn.addEventListener("click", () => {
                                 localStorage.removeItem(obj.emailId);
+                                parentElem.removeChild(childElem);
                             });
+                            
+                            parentElem.appendChild(childElem);
+                             
+                            // Edit button Added
+                            let editbtn = document.createElement("button");
+                            editbtn.innerText = "Edit";
+                            
+                            editbtn.addEventListener("click" , () => {
+                                localStorage.removeItem(obj.emailId);
+                                parentElem.removeChild(childElem);
+                                document.querySelector("#fname").value = obj.userName;
+                                document.querySelector("#email").value = obj.emailId;
+                                document.querySelector("#phone_num").value = obj.phoneNum;
+                                
+                            });
+                            childElem.appendChild(editbtn);
+                            parentElem.appendChild(childElem);
+
                         };    
                     
                   </script>
