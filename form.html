@@ -49,6 +49,7 @@
                 <input type="time" id="Time" name="Time for Call" style="width: 246px;" required>
                 <br>
                 <input type="submit" value="GET A CALL" style="background-color: darkorange;" required>
+            
             </form>
             <ul></ul>
         </fieldset>
@@ -60,15 +61,15 @@
                         event.preventDefault();
 
                         let userName = event.target.fname.value;
-                        let email = event.target.email.value;
+                        let emailId = event.target.email.value;
                         let phoneNum = event.target.phone_num.value;
 
-                        localStorage.setItem('fullName' , userName);
-                        localStorage.setItem('email', email);
-                        localStorage.setItem('phone_num', phoneNum);
+                        // localStorage.setItem('fullName' , userName);
+                        // localStorage.setItem('email', emailId);
+                        // localStorage.setItem('phone_num', phoneNum);
                         let obj = {
                             userName,
-                            email,
+                            emailId,
                             phoneNum 
                         };
                         
@@ -78,7 +79,7 @@
 
                         let my_objs = JSON.stringify(obj);
                         
-                        localStorage.setItem(email, my_objs);
+                        localStorage.setItem(emailId, my_objs);
 
                         let my_objd = JSON.parse(localStorage.getItem("obj"));
                         
@@ -87,13 +88,24 @@
                         };
                         function showListOfUser(obj){
   
-                         let parentElem = document.querySelector("ul");
-                         let childElem = document.createElement("li");
+                         parentElem = document.querySelector("ul");
+                         childElem = document.createElement("li");
 
-                         childElem.textContent = "Name -" + obj.userName +  " Email - " + obj.email + " PhoneNum -" + obj.phoneNum;
+                         childElem.textContent = "Name -" + obj.userName +  " Email - " + obj.emailId + " PhoneNum -" + obj.phoneNum;
 
-                         parentElem.appendChild(childElem);
-                        };
+                            
+                            
+                            parentElem.appendChild(childElem);
+                    
+                            let delbtn = document.createElement("button");
+                            delbtn.innerText = "Delete";
+                            childElem.appendChild(delbtn);
+                            
+                            delbtn.addEventListener("click" , () => {
+                                parentElem.removeChild(childElem);
+                                localStorage.removeItem(obj.emailId);
+                            });
+                        };    
                     
                   </script>
 
