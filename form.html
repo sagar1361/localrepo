@@ -85,7 +85,7 @@
                         
                         //showListOfUser(obj);
 
-                        axios.post("https://crudcrud.com/api/3ba1f968dc7f4f3383a8239c6be3e0e9/respose_Data", obj)
+                        axios.post("https://crudcrud.com/api/3ba1f968dc7f4f3383a8239c6be3e0e9/response_Data", obj)
                             .then((response) => {
                                 showListOfUser(response.data)
                                 console.log(response)
@@ -94,6 +94,20 @@
                                 console.log(err)
                             })
                         };
+
+                        window.addEventListener("DOMContentLoaded", () => {
+                            axios.get("https://crudcrud.com/api/3ba1f968dc7f4f3383a8239c6be3e0e9/response_Data")
+                            .then((response) => {
+                                console.log(response)
+
+                                for(var i=0;i<response.data.length;i++){
+                                    showListOfUser(response.data[i])
+                                }
+                            })
+                            .catch((error) => {
+                                console.log(error)
+                            })
+                        })
                         function showListOfUser(obj){
   
                          parentElem = document.querySelector("#listofItems");
