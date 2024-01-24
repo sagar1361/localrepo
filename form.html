@@ -55,7 +55,7 @@
         </fieldset>
     </section>
 
-                  
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js"></script>
                   <script>
                         function registration(event) {
                         event.preventDefault();
@@ -77,14 +77,22 @@
                         // console.log(event.target.Time.value);
                         
 
-                        let my_objs = JSON.stringify(obj);
+                        //let my_objs = JSON.stringify(obj);
                         
-                        localStorage.setItem(obj.emailId, my_objs);
+                        //localStorage.setItem(obj.emailId, my_objs);
 
-                        let my_objd = JSON.parse(localStorage.getItem("obj"));
+                        //let my_objd = JSON.parse(localStorage.getItem("obj"));
                         
-                        showListOfUser(obj);
-    
+                        //showListOfUser(obj);
+
+                        axios.post("https://crudcrud.com/api/3ba1f968dc7f4f3383a8239c6be3e0e9/respose_Data", obj)
+                            .then((response) => {
+                                showListOfUser(response.data)
+                                console.log(response)
+                            })
+                            .catch((err) => {
+                                console.log(err)
+                            })
                         };
                         function showListOfUser(obj){
   
