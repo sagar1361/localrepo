@@ -123,19 +123,7 @@
                             parentNode.innerHTML = parentNode.innerHTML + childHTML;
 
                             }
-                        //  childElem.textContent = "Name -" + obj.userName +  " Email -" + obj.emailId + " PhoneNum -" + obj.phoneNum;
                             
-                        //  delete button Added
-                            // let delbtn = document.createElement("button");
-                            // delbtn.innerText = "Delete";
-                            // childElem.appendChild(delbtn);
-                            
-                            // delbtn.addEventListener("click", () => {
-                            //     // localStorage.removeItem(obj.emailId);
-                            //     // parentElem.removeChild(childElem);
-                            // });
-                            
-
                             function deleteUser(objId){
                                 axios.delete(`https://crudcrud.com/api/f09dd6f0ca294298b02cc2a12239b466/appointmentData/${objId}`)
                                 .then((response) => {
@@ -154,22 +142,6 @@
                                     parentnode.removeChild(childnodetobeDelete);
                                 }
                             }
-                            // parentElem.appendChild(childElem);
-                             
-                            // Edit button Added
-                            // let editbtn = document.createElement("button");
-                            // editbtn.innerText = "Edit";
-                            
-                            // editbtn.addEventListener("click" , () => {
-                            //     localStorage.removeItem(obj.emailId);
-                            //     parentElem.removeChild(childElem);
-                            //     document.querySelector("#fname").value = obj.userName;
-                            //     document.querySelector("#email").value = obj.emailId;
-                            //     document.querySelector("#phone_num").value = obj.phoneNum;
-                                
-                            // });
-                            // childElem.appendChild(editbtn);
-                            // parentElem.appendChild(childElem);
                     
     </script>
 
