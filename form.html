@@ -55,48 +55,48 @@
         </fieldset>
     </section>
 
-                  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js"></script>
-                  <script>
-                        function registration(event) {
-                        event.preventDefault();
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js"></script>
+    <script>
+        function registration(event) {
+        event.preventDefault();
 
-                        let userName = event.target.fname.value;
-                        let emailId = event.target.email.value;
-                        let phoneNum = event.target.phone_num.value;
+        let userName = event.target.fname.value;
+        let emailId = event.target.email.value;
+        let phoneNum = event.target.phone_num.value;
 
-                        // localStorage.setItem('fullName' , userName);
-                        // localStorage.setItem('email', emailId);
-                        // localStorage.setItem('phone_num', phoneNum);
-                        let obj = {
-                            userName,
-                            emailId,
-                            phoneNum 
-                        };
+        // localStorage.setItem('fullName' , userName);
+        // localStorage.setItem('email', emailId);
+        // localStorage.setItem('phone_num', phoneNum);
+            let obj = {
+              userName,
+              emailId,
+              phoneNum 
+            };
                         
-                        // console.log(event.target.Date.value);
-                        // console.log(event.target.Time.value);
+            // console.log(event.target.Date.value);
+            // console.log(event.target.Time.value);
                         
 
-                        //let my_objs = JSON.stringify(obj);
+            //let my_objs = JSON.stringify(obj);
                         
-                        //localStorage.setItem(obj.emailId, my_objs);
+            //localStorage.setItem(obj.emailId, my_objs);
 
-                        //let my_objd = JSON.parse(localStorage.getItem("obj"));
+            //let my_objd = JSON.parse(localStorage.getItem("obj"));
                         
-                        //showListOfUser(obj);
+            //showListOfUser(obj);
 
-                        axios.post("https://crudcrud.com/api/3ba1f968dc7f4f3383a8239c6be3e0e9/response_Data", obj)
-                            .then((response) => {
-                                showListOfUser(response.data)
-                                console.log(response)
-                            })
-                            .catch((err) => {
-                                console.log(err)
-                            })
-                        };
+                axios.post("https://crudcrud.com/api/f09dd6f0ca294298b02cc2a12239b466/appointmentData", obj)
+                    .then((response) => {
+                        showListOfUser(response.data)
+                        console.log(response)
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+                }
 
-                        window.addEventListener("DOMContentLoaded", () => {
-                            axios.get("https://crudcrud.com/api/3ba1f968dc7f4f3383a8239c6be3e0e9/response_Data")
+                    window.addEventListener("DOMContentLoaded", () => {
+                        axios.get("https://crudcrud.com/api/f09dd6f0ca294298b02cc2a12239b466/appointmentData")
                             .then((response) => {
                                 console.log(response)
 
@@ -107,44 +107,71 @@
                             .catch((error) => {
                                 console.log(error)
                             })
-                        })
-                        function showListOfUser(obj){
-  
-                         parentElem = document.querySelector("#listofItems");
-                         childElem = document.createElement("li");
+                    })
 
-                         childElem.textContent = "Name -" + obj.userName +  " Email -" + obj.emailId + " PhoneNum -" + obj.phoneNum;
+                            function showListOfUser(obj){
+                            document.getElementById("fname").value = '';
+                            document.getElementById("email").value = '';
+                            document.getElementById("phone_num").value = '';
+    
+                            const parentNode = document.getElementById("listofItems");
+                            const childHTML = `<li id = '${obj._id}'> ${obj.userName} - ${obj.emailId}
+                                                <button onclick=deleteUser('${obj._id}')> delete user </button>
+                                                <button onclick=editUser('${obj._id}')>  Edit </button>
+                                                </li>`
+                            
+                            parentNode.innerHTML = parentNode.innerHTML + childHTML;
+
+                            }
+                        //  childElem.textContent = "Name -" + obj.userName +  " Email -" + obj.emailId + " PhoneNum -" + obj.phoneNum;
                             
                         //  delete button Added
-                            let delbtn = document.createElement("button");
-                            delbtn.innerText = "Delete";
-                            childElem.appendChild(delbtn);
+                            // let delbtn = document.createElement("button");
+                            // delbtn.innerText = "Delete";
+                            // childElem.appendChild(delbtn);
                             
-                            delbtn.addEventListener("click", () => {
-                                localStorage.removeItem(obj.emailId);
-                                parentElem.removeChild(childElem);
-                            });
+                            // delbtn.addEventListener("click", () => {
+                            //     // localStorage.removeItem(obj.emailId);
+                            //     // parentElem.removeChild(childElem);
+                            // });
                             
-                            parentElem.appendChild(childElem);
+
+                            function deleteUser(objId){
+                                axios.delete(`https://crudcrud.com/api/f09dd6f0ca294298b02cc2a12239b466/appointmentData/${objId}`)
+                                .then((response) => {
+                                    removeUser(objId)
+                                    console.log("Userdeleted")
+                                })
+                                .catch((err) => {
+                                    console.log(err)
+                                })
+                            }
+
+                            function removeUser(objId){
+                                const parentnode = document.getElementById("listofItems")
+                                const childnodetobeDelete = document.getElementById(objId)
+                                if(childnodetobeDelete){
+                                    parentnode.removeChild(childnodetobeDelete);
+                                }
+                            }
+                            // parentElem.appendChild(childElem);
                              
                             // Edit button Added
-                            let editbtn = document.createElement("button");
-                            editbtn.innerText = "Edit";
+                            // let editbtn = document.createElement("button");
+                            // editbtn.innerText = "Edit";
                             
-                            editbtn.addEventListener("click" , () => {
-                                localStorage.removeItem(obj.emailId);
-                                parentElem.removeChild(childElem);
-                                document.querySelector("#fname").value = obj.userName;
-                                document.querySelector("#email").value = obj.emailId;
-                                document.querySelector("#phone_num").value = obj.phoneNum;
+                            // editbtn.addEventListener("click" , () => {
+                            //     localStorage.removeItem(obj.emailId);
+                            //     parentElem.removeChild(childElem);
+                            //     document.querySelector("#fname").value = obj.userName;
+                            //     document.querySelector("#email").value = obj.emailId;
+                            //     document.querySelector("#phone_num").value = obj.phoneNum;
                                 
-                            });
-                            childElem.appendChild(editbtn);
-                            parentElem.appendChild(childElem);
-
-                        };    
+                            // });
+                            // childElem.appendChild(editbtn);
+                            // parentElem.appendChild(childElem);
                     
-                  </script>
+    </script>
 
 </body>
 </html>
